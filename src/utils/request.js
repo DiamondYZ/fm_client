@@ -10,7 +10,8 @@ const service = axios.create({
   baseURL: 'http://tuoguan.lecyon.com/fm/a',
   headers: { 'content-type': 'application/x-www-form-urlencoded' }, // 请求头，发送FormData格式的数据，必须是 这种请求头。
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 5000,
+  withCredentials: true
 })
 
 // request interceptor
@@ -24,9 +25,8 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      console.log(33433)
       let cookie = 'jeesite.session.id=' + getToken()
-      config.headers['cookie'] = cookie
+      config.headers['Cookie'] = cookie
     }
     return config
   },
