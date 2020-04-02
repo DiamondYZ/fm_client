@@ -51,39 +51,35 @@
                 style="width: 100%">
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="hostNumber"
-                         label="主机号" />
+                         prop="carId"
+                         label="农机号" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="carOwner"
+                         prop="fmCar.owner"
                          label="车主" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="ownerPhone"
+                         prop="fmCar.ownerPhone"
                          label="车主电话" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="area"
+                         prop="workLandarea"
                          label="作业面积(亩)" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="mileage"
-                         label="里程(公里)" />
-        <el-table-column align="center"
-                         show-overflow-tooltip
-                         prop="averageDepth"
+                         prop="depth"
                          label="平均深度(厘米)" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="dateFrom"
+                         prop="beginDate"
                          label="开始时间" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="dateTo"
+                         prop="endDate"
                          label="结束时间" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="workType"
+                         prop="type"
                          label="作业类型" />
         <el-table-column align="center"
                          show-overflow-tooltip
@@ -93,225 +89,84 @@
             <el-button size="mini"
                        type="primary"
                        @click="handleShowMapDetail(scope.$index, scope.row)">地图详情</el-button>
-
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="pagination clearfix">
-      <el-pagination :page-size="20"
+      <el-pagination :page-size="page.pageSize"
+                     :current-page="page.pageNo"
                      layout="total, prev, pager, next, jumper"
-                     :total="400"
+                     :total="page.total"
                      @current-change="handleCurrentChange" />
     </div>
   </div>
 </template>
 
 <script>
+import {getList} from '@/api/deep-work'
+
 export default {
   data() {
     return {
       searchFilter: {
         serialNumber: '',
-        hostNumber: '',
-        workType: '',
-        dateFrom: '',
-        dateTo: ''
+        carId: '',
+        type: '',
+        beginDate: '',
+        endDate: ''
+      },
+      page:{
+        pageSize: 10,
+        total: 0,
+        pageNo: 1
       },
       tableData: [
         {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
-        },
-        {
-          dateFrom: '2016-05-03 15:41:25',
-          dateTo: '2016-05-03 15:41:25',
-          hostNumber: 'GWA204192592',
-          carOwner: '王小虎',
-          ownerPhone: '12345678954',
-          area: '26.47',
-          mileage: '10.56',
-          averageDepth: '21',
-          workType: '深松作业'
+          'isNewRecord': true,
+          'fmCar': {
+            'isNewRecord': true,
+            'owner': '李建新',
+            'ownerPhone': '15904285936'
+          },
+          'carId': 'GWA204192483',
+          'type': '31',
+          'depth': '32.75',
+          'passRate': '0.83',
+          'workLandarea': '1638.74',
+          'qualifiedLandarea': '1353.70',
+          'distance': '456.73',
+          'overlapRate': '0.00',
+          'repeatRate': '0.00',
+          'beginDate': '2019-10-26',
+          'endDate': '2020-4-01',
+          'index': 0,
+          'totalFlow': '0.00',
+          'seed': '0.00',
+          'seedPerMu': '0.00'
         }
       ]
     }
   },
+  mounted() {
+    console.log(111)
+    this.pageQuery();
+  },
   methods: {
+    pageQuery(){
+      let _this = this
+      let param = {}
+      param.pageNo = this.page.pageNo;
+      param.pageSize = this.page.pageSize;
+      param.type = 31
+      getList(param).then(res => {
+        console.log(JSON.stringify(res))
+        //_this.tableData = data
+      })
+    },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
+      this.page.pageNo = val
+      this.pageQuery()
     },
     handleShowMapDetail(index, rowItem) {
       console.log(index, rowItem)

@@ -1,7 +1,7 @@
 <template>
   <!-- 首页内容聚合展示 -->
   <div class="hexagon-page-container">
-    <h3 class="title">智慧农机管理平台</h3>
+    <h3 class="title">农机管理平台</h3>
     <div class="hexagon-container ">
       <div v-for="(item,index) in hexagonList"
            :key="index"
@@ -52,7 +52,7 @@ export default {
         },
         {
           icon: 'truck',
-          title: '主机管理',
+          title: '深翻作业',
           path: '/info/host/host-info/list'
         },
         {

@@ -46,21 +46,6 @@ export const constantRoutes = [{
   hidden: true
 },
 {
-  path: '/',
-  component: Layout,
-  redirect: '/main',
-  children: [{
-    path: 'main',
-    name: 'Main',
-    component: () => import('@/views/main/index'),
-    meta: {
-      title: '首页',
-      icon: 'hexagon'
-    }
-  }
-  ]
-},
-{
   path: '/dash',
   component: Layout,
   redirect: '/dash/dashboard',
@@ -71,6 +56,21 @@ export const constantRoutes = [{
     meta: {
       title: '仪表盘',
       icon: 'monitor-dashboard'
+    }
+  }
+  ]
+},
+{
+  path: '/',
+  component: Layout,
+  redirect: '/main',
+  children: [{
+    path: 'main',
+    name: 'Main',
+    component: () => import('@/views/main/index'),
+    meta: {
+      title: '首页',
+      icon: 'hexagon'
     }
   }
   ]
