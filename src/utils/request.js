@@ -2,7 +2,6 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
-import qs from 'qs'
 
 // create an axios instance
 const service = axios.create({
@@ -27,6 +26,8 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       // let cookie = 'jeesite.session.id=' + getToken()
       // config.headers['Cookie'] = cookie'
+      config.headers['Content-Type'] = 'application/json;charset=UTF-8'
+      // config.headers['Access-Control-Allow-Origin'] = '*'
       if (getToken()) {
         config.headers['token'] = getToken()
       }

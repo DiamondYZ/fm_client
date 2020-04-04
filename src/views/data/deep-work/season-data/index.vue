@@ -159,6 +159,8 @@ export default {
       param.pageNo = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
+      param.entity = {type:31}
+      param.orders = [{asc:false,column:null}]
       getList(param).then(res => {
         console.log(JSON.stringify(res))
         //_this.tableData = data
