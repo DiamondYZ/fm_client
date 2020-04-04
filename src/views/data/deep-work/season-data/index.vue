@@ -105,6 +105,7 @@
 
 <script>
 import {getList} from '@/api/deep-work'
+import { getToken } from '@/utils/auth'
 
 export default {
   data() {
@@ -157,7 +158,7 @@ export default {
       let param = {}
       param.pageNo = this.page.pageNo;
       param.pageSize = this.page.pageSize;
-      param.type = 31
+      param.userToken = getToken()
       getList(param).then(res => {
         console.log(JSON.stringify(res))
         //_this.tableData = data
