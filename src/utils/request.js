@@ -7,6 +7,7 @@ import { getToken, removeToken } from '@/utils/auth'
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   baseURL: 'http://49.4.71.112:8088/farm',
+  // baseURL: 'http://127.0.0.1:8088/farm',
   // headers: { 'Content-Type': 'application/json;charset=UTF-8' },
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000
@@ -93,7 +94,7 @@ service.interceptors.response.use(
     if (error.response || error.response.status === 401) {
       // remove token and go to login page to re-login
       removeToken()
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      location.replace('./login')
     }
     console.log('err' + error) // for debug
     Message({
