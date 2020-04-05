@@ -159,7 +159,7 @@ export default {
       let _this = this
       let param = {}
       this.isLoading = true
-      param.pageNo = this.page.pageNo;
+      param.pageNum = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
       param.entity = {type:31}
