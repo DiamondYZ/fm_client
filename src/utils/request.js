@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  baseURL: 'http://49.4.71.112:8088/farm',
-  // headers: { 'content-type': 'application/x-www-form-urlencoded' },  // 请求头，发送FormData格式的数据，必须是 这种请求头。
+  baseURL: 'http://127.0.0.1:8088/farm',
+  // headers: { 'Content-Type': 'application/json;charset=UTF-8' },
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000
-  // withCredentials: true
+  timeout: 5000,
+  withCredentials: true
 })
 
 // request interceptor
@@ -26,11 +26,12 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       // let cookie = 'jeesite.session.id=' + getToken()
       // config.headers['Cookie'] = cookie'
-      config.headers['Content-Type'] = 'application/json;charset=UTF-8'
-      // config.headers['Access-Control-Allow-Origin'] = '*'
+      // config.headers['Access-Control-Request-Headers'] = '*'
+      // config.headers['Access-Control-Allow-Headers'] = '*'
       if (getToken()) {
         config.headers['token'] = getToken()
       }
+      console.log(config)
     }
     return config
   },
@@ -54,6 +55,7 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
+    console.log(JSON.stringify(response))
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       console.log('请求失败')
@@ -89,13 +91,19 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('err1:' + error) // for debug
+    // if (error === 'Error: Request failed with status code 401') {
+    removeToken()
+    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    // }
+    /*
     Message({
       message: error.message,
       type: 'error',
       duration: 5 * 1000
     })
     return Promise.reject(error)
+    */
   }
 )
 
