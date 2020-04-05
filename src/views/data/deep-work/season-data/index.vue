@@ -45,6 +45,7 @@
     </div>
     <div class="table-container">
       <el-table :data="tableData"
+                v-loading = "isLoading"
                 height="660"
                 border
                 stripe
@@ -122,6 +123,7 @@ export default {
         total: 0,
         pageNo: 1
       },
+      isLoading: false,
       tableData: [
         {
           'isNewRecord': true,
@@ -156,14 +158,41 @@ export default {
     pageQuery(){
       let _this = this
       let param = {}
+      this.isLoading = true
       param.pageNo = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
       param.entity = {type:31}
       param.orders = [{asc:false,column:null}]
       getList(param).then(res => {
-        console.log(JSON.stringify(res))
+        //console.log(JSON.stringify(res))
         //_this.tableData = data
+        _this.tableData = []
+        if(res.code == 200){
+          this.page.total = res.data.total
+          this.page.pageNo = res.data.current
+          let _this = this
+          res.data.records.map(function(temp){
+            let item = {}
+            let fmCar = {}
+            item.carId = temp.carId
+            item.depth = temp.depth
+            item.passRate = temp.passRate
+            item.workLandarea = temp.workLandarea
+            item.distance = temp.distance
+            item.fmCar = fmCar
+            fmCar.owner = temp.carOwner
+            fmCar.ownerPhone = temp.carOwnerPhone
+            _this.tableData.push(item)
+          })
+        }else{
+          this.$message({
+            duration: 3000,
+            content: res.errorMessage
+          });
+        }
+        console.log(JSON.stringify(this.tableData))
+        this.isLoading = false
       })
     },
     handleCurrentChange(val) {
