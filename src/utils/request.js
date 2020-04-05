@@ -6,11 +6,10 @@ import { getToken, removeToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  baseURL: 'http://127.0.0.1:8088/farm',
+  baseURL: 'http://49.4.71.112:8088/farm',
   // headers: { 'Content-Type': 'application/json;charset=UTF-8' },
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000,
-  withCredentials: true
+  timeout: 5000
 })
 
 // request interceptor
@@ -91,19 +90,18 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err1:' + error) // for debug
-    // if (error === 'Error: Request failed with status code 401') {
-    removeToken()
-    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-    // }
-    /*
+    if (error.response || error.response.status === 401) {
+      // remove token and go to login page to re-login
+      removeToken()
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    }
+    console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',
       duration: 5 * 1000
     })
     return Promise.reject(error)
-    */
   }
 )
 
