@@ -151,7 +151,6 @@ export default {
             content: res.errorMessage
           });
         }
-        console.log(JSON.stringify(this.tableData))
         this.isLoading = false
       })
     },

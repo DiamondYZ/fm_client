@@ -89,7 +89,7 @@
           <template slot-scope="scope">
             <el-button size="mini"
                        type="primary"
-                       @click="handleShowMapDetail(scope.$index, scope.row)">地图详情</el-button>
+                       @click="handleShowDetail(scope.$index, scope.row)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -162,7 +162,10 @@ export default {
       param.pageNum = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
-      param.entity = {type:31}
+      param.entity = {
+        type:31,
+        carId:this.searchFilter.carId
+      }
       param.orders = [{asc:false,column:null}]
       getStatisticList(param).then(res => {
         //console.log(JSON.stringify(res))
@@ -189,7 +192,6 @@ export default {
             content: res.errorMessage
           });
         }
-        console.log(JSON.stringify(this.tableData))
         this.isLoading = false
       })
     },
@@ -197,8 +199,8 @@ export default {
       this.page.pageNo = val
       this.pageQuery()
     },
-    handleShowMapDetail(index, rowItem) {
-      console.log(index, rowItem)
+    handleShowDetail(index, rowItem) {
+      this.$router.push({ path: 'season-data-detail', query: { carId: rowItem.carId }})
     }
   }
 }
