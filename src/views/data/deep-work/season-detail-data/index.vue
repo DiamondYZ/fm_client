@@ -3,7 +3,7 @@
     <div class="header clearfix">
       <div class="title">
         <svg-icon icon-class="calendar-month" />
-        深松当季作业详情
+        深松作业当季数据详情
       </div>
       <el-button type="info"
                  size="mini"
@@ -48,8 +48,8 @@
                 style="width: 100%">
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="lineNumber"
-                         label="行号" />
+                         prop="id"
+                         label="作业序列号" />
         <el-table-column align="center"
                          show-overflow-tooltip
                          prop="carId"
@@ -68,15 +68,15 @@
                          label="作业面积(亩)" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="depth"
+                         prop="avgDepth"
                          label="平均深度(厘米)" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="beginDate"
+                         prop="workStarttime"
                          label="开始时间" />
         <el-table-column align="center"
                          show-overflow-tooltip
-                         prop="endDate"
+                         prop="workEndtime"
                          label="结束时间" />
         <el-table-column align="center"
                          show-overflow-tooltip
@@ -105,8 +105,7 @@
 </template>
 
 <script>
-import {getList} from '@/api/deep-work'
-import {getStatisticList} from '@/api/deep-work'
+import {getDetailList} from '@/api/deep-work'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -141,7 +140,7 @@ export default {
       param.userToken = getToken()
       param.entity = {type:31}
       param.orders = [{asc:false,column:null}]
-      getStatisticList(param).then(res => {
+      getDetailList(param).then(res => {
         _this.tableData = []
         if(res.code == 200){
           this.page.total = res.data.total

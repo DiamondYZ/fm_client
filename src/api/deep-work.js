@@ -8,6 +8,14 @@ export function getList(data) {
   })
 }
 
+export function getDetailList(data) {
+  return request({
+    url: '/fm-work-details/getList',
+    method: 'post',
+    data
+  })
+}
+
 export function getStatisticList(data) {
   return request({
     url: '/fm-work-total/getList',
