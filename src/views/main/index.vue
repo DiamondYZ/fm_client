@@ -48,7 +48,7 @@ export default {
         {
           icon: 'truck-fast-outline',
           title: '深松作业',
-          path: '/data/deep-work/season-report'
+          path: '/data/deep-work/season-statistic-data'
         },
         {
           icon: 'truck',

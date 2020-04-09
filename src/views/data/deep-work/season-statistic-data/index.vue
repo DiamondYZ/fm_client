@@ -3,7 +3,7 @@
     <div class="header clearfix">
       <div class="title">
         <svg-icon icon-class="calendar-month" />
-        农机当季作业详情表管理
+        深松当季作业统计
       </div>
       <el-button type="info"
                  size="mini"
@@ -19,10 +19,6 @@
       <label>主机号：</label>
       <el-input v-model="searchFilter.hostNumber"
                 size="mini" />
-<!--      <label>作业类型：</label>-->
-<!--      <el-input :disabled="true"-->
-<!--                size="mini"-->
-<!--                placeholder="深松作业" />-->
       <label>作业开始时间：</label>
       <el-date-picker v-model="searchFilter.dateFrom"
                       size="mini"

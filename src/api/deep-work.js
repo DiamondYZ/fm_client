@@ -7,3 +7,11 @@ export function getList(data) {
     data
   })
 }
+
+export function getStatisticList(data) {
+  return request({
+    url: '/fm-work-total/getList',
+    method: 'post',
+    data
+  })
+}

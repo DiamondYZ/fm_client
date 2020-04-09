@@ -3,7 +3,7 @@
     <div class="header clearfix">
       <div class="title">
         <svg-icon icon-class="calendar-month" />
-        农机当季作业详情表管理
+        深松当季作业详情
       </div>
       <el-button type="info"
                  size="mini"
@@ -19,10 +19,6 @@
       <label>主机号：</label>
       <el-input v-model="searchFilter.hostNumber"
                 size="mini" />
-<!--      <label>作业类型：</label>-->
-<!--      <el-input :disabled="true"-->
-<!--                size="mini"-->
-<!--                placeholder="深松作业" />-->
       <label>作业开始时间：</label>
       <el-date-picker v-model="searchFilter.dateFrom"
                       size="mini"
@@ -129,30 +125,7 @@ export default {
         pageNo: 1
       },
       isLoading: false,
-      tableData: [
-        {
-          "lineNumber": 1,
-          "carId": "GWA204192294",
-          "carOwner": "明金亮",
-          "carOwnerPhone": "15940642108",
-          "type": "31",
-          "depth": "35.09",
-          "passRate": "0.92",
-          "workLandarea": "10782.39",
-          "submitLandarea": null,
-          "qualifiedLandarea": "9964.48",
-          "distance": "2843.18",
-          "overlapRate": null,
-          "repeatRate": null,
-          "missRate": null,
-          "beginDate": "2019-10-05",
-          "endDate": "2020-04-05",
-          "totalFlow": "0.0",
-          "seed": "0.0",
-          "seedPerMu": "0.0",
-          "userCode": null
-        }
-      ]
+      tableData: []
     }
   },
   mounted() {
@@ -169,22 +142,12 @@ export default {
       param.entity = {type:31}
       param.orders = [{asc:false,column:null}]
       getStatisticList(param).then(res => {
-        //console.log(JSON.stringify(res))
-        //_this.tableData = data
         _this.tableData = []
         if(res.code == 200){
           this.page.total = res.data.total
           this.page.pageNo = res.data.current
           let _this = this
           res.data.records.map(function(temp){
-            // let item = {}
-            // item.carId = temp.carId
-            // item.depth = temp.depth
-            // item.passRate = temp.passRate
-            // item.workLandarea = temp.workLandarea
-            // item.distance = temp.distance
-            // item.owner = temp.owner
-            // item.ownerPhone = temp.ownerPhone
             _this.tableData.push(temp)
           })
         }else{
