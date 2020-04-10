@@ -15,10 +15,10 @@
     <div class="filter-container">
       <label>作业序列号：</label>
       <el-input v-model="searchFilter.serialNumber"
-                size="mini" />
+                size="mini" width="150"/>
       <label>农机号：</label>
       <el-input v-model="searchFilter.carId"
-                size="mini" />
+                size="mini" width="150"/>
       <label>作业开始时间：</label>
       <el-date-picker v-model="searchFilter.dateFrom"
                       size="mini"

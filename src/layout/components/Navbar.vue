@@ -4,12 +4,16 @@
 
     <breadcrumb class="breadcrumb-container" />
 
+    <div  style="padding: 0 15px;">{{name}},欢迎您！</div>
+
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="avatar" class="user-avatar" v-if="avatar">
+          <img :src="'http://tuoguan.lecyon.com/fm/static/images/user1.jpg'" class="user-avatar" v-else>
           <i class="el-icon-caret-bottom" />
         </div>
+
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
             <el-dropdown-item>
@@ -44,7 +48,8 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'name'
     ])
   },
   methods: {

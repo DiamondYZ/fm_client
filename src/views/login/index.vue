@@ -118,11 +118,12 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store
-            .dispatch('user/login', this.loginForm)
+          this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              this.$router.push({ path: '/main' })
-              this.loading = false
+              this.$store.dispatch('user/getInfo').then(() => {
+                this.$router.push({ path: '/main' })
+                this.loading = false
+              })
             })
             .catch(() => {
               this.loading = false
