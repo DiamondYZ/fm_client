@@ -51,6 +51,10 @@ const actions = {
         }
         commit('SET_NAME', response.data.userName)
         commit('SET_AVATAR', response.data.avatar)
+        localStorage.setItem('username', response.data.userName)
+        if (response.data.avatar) {
+          localStorage.setItem('avatar', response.data.avatar)
+        }
         resolve(response)
       }).catch(error => {
         reject(error)

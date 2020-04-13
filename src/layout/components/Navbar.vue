@@ -4,34 +4,44 @@
 
     <breadcrumb class="breadcrumb-container" />
 
-    <div  style="padding: 0 15px;">{{name}},欢迎您！</div>
+    <div class="nav">
+      <div class="nav-item">
+        {{username}},欢迎您！
+      </div>
 
-    <div class="right-menu">
-      <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
-          <img :src="avatar" class="user-avatar" v-if="avatar">
-          <img :src="'http://tuoguan.lecyon.com/fm/static/images/user1.jpg'" class="user-avatar" v-else>
-          <i class="el-icon-caret-bottom" />
-        </div>
+      <div class="right-menu">
+        <el-dropdown class="avatar-container" trigger="click">
+          <div class="avatar-wrapper">
+            <div class="block"  v-if="avatar && avatar != 'null'">
+              <span class="el-avatar el-avatar--circle" style="height: 40px; width: 40px; line-height: 40px;">
+                <img :src="avatar" style="object-fit: cover;">
+              </span>
+            </div>
+            <div class="block" v-else>
+              <span class="el-avatar el-avatar--circle" style="height: 40px; width: 40px; line-height: 40px;">
+                <img :src="'http://tuoguan.lecyon.com/fm/static/images/user1.jpg'" style="object-fit: cover;">
+              </span>
+            </div>
+            <i class="el-icon-caret-bottom" />
+          </div>
 
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              Home
+          <el-dropdown-menu slot="dropdown" class="user-dropdown">
+            <router-link to="/">
+              <el-dropdown-item>
+                首页
+              </el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+              <el-dropdown-item>使用手册</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided>
+              <span style="display:block;" @click="logout">退出</span>
             </el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">Log Out</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -48,9 +58,13 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar',
-      'name'
-    ])
+    ]),
+    username() {
+      return localStorage.getItem('username')
+    },
+    avatar(){
+      return localStorage.getItem('avatar')
+    }
   },
   methods: {
     toggleSideBar() {
@@ -72,11 +86,30 @@ export default {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
+  .nav{
+    float: right;
+    height: 100%;
+    line-height: 40px;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+
+    .nav-item {
+      top: 5px;
+      margin: 0;
+      float: left;
+      list-style: none;
+      position: relative;
+      font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
   .hamburger-container {
     line-height: 46px;
     height: 100%;
     float: left;
-    cursor: pointer;
     transition: background .3s;
     -webkit-tap-highlight-color:transparent;
 
@@ -92,7 +125,7 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    line-height: 40px;
 
     &:focus {
       outline: none;
@@ -117,17 +150,43 @@ export default {
     }
 
     .avatar-container {
+      cursor: pointer ;
       margin-right: 30px;
+      width: 100%;
+      height: 100%;
 
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+        width: 100%;
+        height: 100%;
 
-        .user-avatar {
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
+        .block{
+          width: 100%;
+          height: 100%;
+
+          .el-avatar {
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            color: #fff;
+            background: #c0c4cc;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+
+            img {
+              display: block;
+              height: 100%;
+              vertical-align: middle;
+            }
+          }
+
+          .el-avatar--circle {
+            border-radius: 50%;
+          }
         }
 
         .el-icon-caret-bottom {
