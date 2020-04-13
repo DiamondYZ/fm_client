@@ -200,7 +200,7 @@ export default {
       this.pageQuery()
     },
     handleShowDetail(index, rowItem) {
-      this.$router.push({ path: 'season-data-detail', query: { carId: rowItem.carId }})
+      this.$router.push({ path: 'season-data', query: { carId: rowItem.carId }})
     }
   }
 }

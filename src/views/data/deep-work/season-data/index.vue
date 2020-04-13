@@ -17,7 +17,7 @@
       <el-input v-model="searchFilter.serialNumber"
                 size="mini" />
       <label>主机号：</label>
-      <el-input v-model="searchFilter.hostNumber"
+      <el-input v-model="searchFilter.carId"
                 size="mini" />
       <label>作业开始时间：</label>
       <el-date-picker v-model="searchFilter.dateFrom"
@@ -124,7 +124,12 @@ export default {
     }
   },
   mounted() {
-    this.pageQuery();
+    this.$nextTick(() => {
+      if(this.$route.query.carId){
+        this.searchFilter.carId = this.$route.query.carId
+      }
+      this.pageQuery()
+    })
   },
   methods: {
     pageQuery(){
@@ -134,7 +139,7 @@ export default {
       param.pageNum = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
-      param.entity = {type:31}
+      param.entity = {type:31,carId:this.searchFilter.carId}
       param.orders = [{asc:false,column:null}]
       getList(param).then(res => {
         _this.tableData = []

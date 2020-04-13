@@ -128,11 +128,7 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.searchFilter.carId = this.$route.query.carId
-      console.log(this.$route.query.carId)
-      this.pageQuery()
-    })
+
   },
   methods: {
     pageQuery(){
