@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 // $$ add sub and long routes here
 import deepWorkRoutes from './modules/works/deep-work'
+import reportRoutes from './modules/report/report'
 import hostRoutes from './modules/info/host'
 
 /**
@@ -84,17 +85,17 @@ export const constantRoutes = [{
     title: '作业数据',
     icon: 'chart-bar'
   },
-  children: [
-    {
-      path: 'deep-work',
-      name: 'DeepWork',
-      component: () => import('@/views/data/deep-work/index'),
-      meta: {
-        title: '保护耕地',
-        icon: 'truck-fast-outline'
-      },
-      children: deepWorkRoutes
-    }]
+  children: deepWorkRoutes
+},
+{
+  path: '/report',
+  component: Layout,
+  alwaysShow: true,
+  meta: {
+    title: '报表',
+    icon: 'chart-bar'
+  },
+  children: reportRoutes
 },
 // 信息管理
 {

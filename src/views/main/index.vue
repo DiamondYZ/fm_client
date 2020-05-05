@@ -47,33 +47,18 @@ export default {
         },
         {
           icon: 'truck-fast-outline',
-          title: '保护耕地作业',
+          title: '当季数据',
           path: '/data/deep-work/season-statistic-data'
         },
         {
           icon: 'truck',
-          title: '深翻作业',
+          title: '当季数据详情',
           path: '/info/host/host-info/list'
         },
         {
-          icon: 'office-building',
-          title: '机构管理',
-          path: '/info/agent/agent-manage'
-        },
-        {
           icon: 'account-badge-horizontal',
-          title: '用户管理',
+          title: '日报表',
           path: '/info/user/co-admin'
-        },
-        {
-          icon: 'settings-transfer',
-          title: '产品运维',
-          path: '/product/name'
-        },
-        {
-          icon: 'scale-balance',
-          title: '市场运营',
-          path: '/market/annual-fee'
         }
       ]
     }

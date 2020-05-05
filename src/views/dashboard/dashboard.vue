@@ -26,25 +26,40 @@
           </el-col>
         </el-row>
       </el-col>
-      <el-col :md="24" :lg="10">
+      <el-col :md="24" :lg="17">
         <el-row style="margin:10px">
           <el-col :span="24">
             <header class="ui-sortable-handle">
               <i class="el-icon-tickets" style="padding-left:6px;float:left;margin-top:12px"></i>
               <h3 style="margin-left:10px;margin-top:0px;float:left;font-weight: 400;font-size:14px">设备分布</h3>
             </header>
-            <div id="deviceDistribute" class="widget-body" style="min-height: 518px;">
-            </div>
           </el-col>
+
+          <div id="deviceDistribute" class="widget-body" style="min-height: 578px;">
+            <el-row>
+              <el-col :md="24" :lg="10">
+                <el-row type="flex" justify="center" align="middle" style="height:100%">
+                  <device-table ref="deviceTable" height="481" :style-obj="{margin: '12px 0 0 11px'}"></device-table>
+                </el-row>
+              </el-col>
+
+              <el-col :md="24" :lg="14">
+                <el-row type="flex" justify="center" align="middle">
+                  <device-map ref="deviceMap"></device-map>
+                </el-row>
+              </el-col>
+            </el-row>
+          </div>
         </el-row>
       </el-col>
-      <el-col :md="24" :lg="7"><div>44</div></el-col>
     </el-row>
   </div>
 </template>
 
 <script>
   import echarts from 'echarts'
+  import DeviceTable from '@/views/dashboard/components/deviceTable.vue'
+  import DeviceMap from '@/views/dashboard/components/deviceMap.vue'
   export default {
     name: 'Dashboard',
     data() {
@@ -63,7 +78,11 @@
       this.mapdata = require('@/assets/map-data/data.json')
       this.initMachineStatusChart()
       this.initAlarmCharts()
-      this.initDeviceMap()
+      //this.initDeviceMap()
+    },
+    components: {
+      DeviceTable,
+      DeviceMap,
     },
     methods: {
       initMachineStatusChart(){
@@ -153,6 +172,7 @@
           _this.alarmCharts.resize()
         })
       },
+
       initDeviceMap(){
         this.deviceMapChart = echarts.init(document.getElementById("deviceDistribute"))
         echarts.registerMap('china', this.chinaJson)
@@ -215,6 +235,7 @@
           _this.deviceMapChart.resize()
         })
       }
+
     }
   }
 </script>
