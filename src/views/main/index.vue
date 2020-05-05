@@ -47,7 +47,7 @@ export default {
         },
         {
           icon: 'truck-fast-outline',
-          title: '深松作业',
+          title: '保护耕地作业',
           path: '/data/deep-work/season-statistic-data'
         },
         {

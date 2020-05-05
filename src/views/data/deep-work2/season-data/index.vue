@@ -22,7 +22,7 @@
       <label>作业类型：</label>
       <el-input :disabled="true"
                 size="small"
-                placeholder="深松作业" />
+                placeholder="保护耕地" />
       <label>作业开始时间：</label>
       <el-date-picker v-model="searchFilter.dateFrom"
                       size="small"

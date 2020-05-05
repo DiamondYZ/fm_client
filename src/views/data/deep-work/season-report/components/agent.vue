@@ -30,7 +30,7 @@
       <div class="print-table statistics">
         <table>
           <tr>
-            <th colspan="6">深松作业情况统计</th>
+            <th colspan="6">保护耕地情况统计</th>
           </tr>
           <tr>
             <td class="bold">地区</td>

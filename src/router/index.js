@@ -52,7 +52,7 @@ export const constantRoutes = [{
   children: [{
     path: 'dashboard',
     name: 'Dashboard',
-    component: () => import('@/views/dashboard/index'),
+    component: () => import('@/views/dashboard/dashboard'),
     meta: {
       title: '仪表盘',
       icon: 'monitor-dashboard'
@@ -90,7 +90,7 @@ export const constantRoutes = [{
       name: 'DeepWork',
       component: () => import('@/views/data/deep-work/index'),
       meta: {
-        title: '深松作业',
+        title: '保护耕地',
         icon: 'truck-fast-outline'
       },
       children: deepWorkRoutes

@@ -3,7 +3,7 @@
     <div class="header clearfix">
       <div class="title">
         <svg-icon icon-class="calendar-month" />
-        深松作业当季数据详情
+        保护耕地当季数据详情
       </div>
       <el-button type="info"
                  size="mini"
@@ -139,7 +139,7 @@ export default {
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
       param.entity = {
-        type:31,
+        type:34,
         carId: this.searchFilter.carId
       }
 

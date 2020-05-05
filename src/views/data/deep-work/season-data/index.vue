@@ -3,7 +3,7 @@
     <div class="header clearfix">
       <div class="title">
         <svg-icon icon-class="calendar-month" />
-        深松作业当季数据
+        保护耕地当季数据
       </div>
       <el-button type="info"
                  size="mini"
@@ -164,7 +164,7 @@ export default {
       this.pageQuery()
     },
     handleShowMapDetail(index, rowItem) {
-      console.log(index, rowItem)
+      window.open("http://tuoguan.lecyon.com/fm/a/data/fmWork/workInfo?id=" + rowItem.id + "&type=34","_blank");
     }
   }
 }
