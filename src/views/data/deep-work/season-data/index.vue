@@ -139,7 +139,7 @@ export default {
       param.pageNum = this.page.pageNo;
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
-      param.entity = {type:31,carId:this.searchFilter.carId}
+      param.entity = {type:34,carId:this.searchFilter.carId}
       param.orders = [{asc:false,column:null}]
       getList(param).then(res => {
         _this.tableData = []

@@ -48,17 +48,17 @@ export default {
         {
           icon: 'truck-fast-outline',
           title: '当季数据',
-          path: '/data/deep-work/season-statistic-data'
+          path: '/data/season-data'
         },
         {
           icon: 'truck',
           title: '当季数据详情',
-          path: '/info/host/host-info/list'
+          path: '/data/season-data-detail'
         },
         {
           icon: 'account-badge-horizontal',
           title: '日报表',
-          path: '/info/user/co-admin'
+          path: '/report/daily-report'
         }
       ]
     }

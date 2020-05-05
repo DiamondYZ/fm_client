@@ -163,7 +163,7 @@ export default {
       param.pageSize = this.page.pageSize;
       param.userToken = getToken()
       param.entity = {
-        type:31,
+        type:34,
         carId:this.searchFilter.carId
       }
       param.orders = [{asc:false,column:null}]
